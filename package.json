@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/Dhamie07/CSE341/issues"
   },
-  "homepage": "https://github.com/Dhamie07/CSE341#readme"
+  "homepage": "https://github.com/Dhamie07/CSE341#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
 }
