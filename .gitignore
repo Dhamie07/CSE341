@@ -1,1 +1,7 @@
 /node_modules
+
+# Ignore sensitive environment variables
+.env
+
+
+.DS_Store
