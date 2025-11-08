@@ -1,0 +1,69 @@
+@baseUrl = http://localhost:3000
+
+# ====================================================================
+# 1. GET (READ) - Fetch All Contacts
+# Used to verify current state before and after CUD operations.
+# ====================================================================
+GET {{baseUrl}}/contacts
+
+###
+
+# ====================================================================
+# 2. POST (CREATE) - Create a New Contact
+# All fields are required. Should return the new contact ID.
+# ====================================================================
+POST {{baseUrl}}/contacts
+Content-Type: application/json
+
+{
+    "firstname": "Jane",
+    "lastname": "Doe",
+    "birthday": "1990-05-15",
+    "email": "jane.doe@example.com",
+    "phone": "555-123-4567"
+}
+
+###
+
+# ====================================================================
+# 3. PUT (UPDATE) - Update a Specific Contact
+# NOTE: Replace 'id-to-modify' with a valid ID from a POST or GET request.
+# Expected Status Code: 204 No Content
+# ====================================================================
+@contactId = 690f39c5b5e7d9311d8db580
+PUT {{baseUrl}}/contacts/{{contactId}}
+Content-Type: application/json
+
+{
+    "firstname": "Janie",
+    "lastname": "D. Updated",
+    "birthday": "1990-05-15",
+    "email": "janie.updated@example.com",
+    "phone": "555-987-6543"
+}
+
+###
+
+# ====================================================================
+# 4. GET (READ) - Verify the Update
+# NOTE: Use the same ID as above to verify the changes.
+# ====================================================================
+GET {{baseUrl}}/contacts/{{contactId}}
+
+###
+
+# ====================================================================
+# 5. DELETE (DELETE) - Delete a Specific Contact
+# NOTE: Replace 'id-to-delete' with a valid ID.
+# Expected Status Code: 204 No Content
+# ====================================================================
+@contactIdToDelete = 690f39c5b5e7d9311d8db580
+DELETE {{baseUrl}}/contacts/{{contactIdToDelete}}
+
+###
+
+# ====================================================================
+# 6. GET (READ) - Verify the Deletion
+# Should return 404 Not Found if the deletion was successful.
+# ====================================================================
+GET {{baseUrl}}/contacts/{{contactIdToDelete}}
