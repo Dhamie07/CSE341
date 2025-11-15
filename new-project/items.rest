@@ -1,28 +1,66 @@
-###
-# 1. POST: Create a New Item
-# This tests the createItem controller function and the POST /items route.
-# It requires a JSON body matching the Item model (name and value).
-POST http://localhost:8080/items
+@baseUrl = http://localhost:8080
+@itemId = PASTE_ID_HERE
+@itemIdToDelete = PASTE_ID_HERE
+
+# ====================================================================
+# 1. POST (CREATE) - Create a New Item
+# Run this FIRST. Copy the returned '_id' value into the @itemId variable above.
+# Expected Status Code: 201 Created
+# ====================================================================
+POST {{baseUrl}}/items
 Content-Type: application/json
 
 {
-    "name": "Project Requirement Checklist",
-    "value": 1
+    "name": "Initial Test Item",
+    "value": 15
 }
 
 ###
-# 2. GET: Retrieve All Items
-# This tests the getAllItems controller function and the GET /items route.
-# It should return a list containing the item(s) created in the previous POST requests.
-GET http://localhost:8080/items
+
+# ====================================================================
+# 2. GET (READ) - Retrieve All Items
+# Should return the item created in Step 1.
+# Expected Status Code: 200 OK
+# ====================================================================
+GET {{baseUrl}}/items
 
 ###
-# 3. POST: Create Another Item (Optional)
-# Run this to add more data and confirm the GET request returns multiple items.
-POST http://localhost:8080/items
+
+# ====================================================================
+# 3. PUT (UPDATE) - Update a Specific Item
+# NOTE: Ensure @itemId above has the correct ID.
+# Expected Status Code: 200 OK (returns updated item)
+# ====================================================================
+PUT {{baseUrl}}/items/{{itemId}}
 Content-Type: application/json
 
 {
-    "name": "Database Connection String",
-    "value": 10
+    "name": "UPDATED Item Name",
+    "value": 999
 }
+
+###
+
+# ====================================================================
+# 4. GET (READ) - Verify the Update
+# NOTE: Uses the same ID to verify the changes (name and value should be updated).
+# Expected Status Code: 200 OK
+# ====================================================================
+GET {{baseUrl}}/items/{{itemId}}
+
+###
+
+# ====================================================================
+# 5. DELETE (DELETE) - Delete a Specific Item
+# NOTE: Ensure @itemIdToDelete above has the correct ID.
+# Expected Status Code: 204 No Content
+# ====================================================================
+DELETE {{baseUrl}}/items/{{itemIdToDelete}}
+
+###
+
+# ====================================================================
+# 6. GET (READ) - Verify the Deletion
+# Should return 404 Not Found if the deletion was successful.
+# ====================================================================
+GET {{baseUrl}}/items/{{itemIdToDelete}}

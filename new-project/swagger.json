@@ -68,6 +68,83 @@
           }
         }
       }
+    },
+    "/items/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "The unique MongoDB ID of the item."
+        }
+      ],
+      "get": {
+        "tags": [
+          "Items"
+        ],
+        "summary": "Retrieves a single item by ID",
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved item."
+          },
+          "400": {
+            "description": "Invalid ID format."
+          },
+          "404": {
+            "description": "Item not found."
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Items"
+        ],
+        "summary": "Updates an existing item by ID",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ItemInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Item successfully updated and returned."
+          },
+          "400": {
+            "description": "Invalid ID format."
+          },
+          "404": {
+            "description": "Item not found."
+          },
+          "422": {
+            "description": "Validation failed during update (e.g., trying to set value to a negative number)."
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Items"
+        ],
+        "summary": "Deletes an item by ID",
+        "responses": {
+          "204": {
+            "description": "Item successfully deleted (No Content)."
+          },
+          "400": {
+            "description": "Invalid ID format."
+          },
+          "404": {
+            "description": "Item not found."
+          }
+        }
+      }
     }
   },
   "components": {
