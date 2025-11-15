@@ -1,0 +1,28 @@
+###
+# 1. POST: Create a New Item
+# This tests the createItem controller function and the POST /items route.
+# It requires a JSON body matching the Item model (name and value).
+POST http://localhost:8080/items
+Content-Type: application/json
+
+{
+    "name": "Project Requirement Checklist",
+    "value": 1
+}
+
+###
+# 2. GET: Retrieve All Items
+# This tests the getAllItems controller function and the GET /items route.
+# It should return a list containing the item(s) created in the previous POST requests.
+GET http://localhost:8080/items
+
+###
+# 3. POST: Create Another Item (Optional)
+# Run this to add more data and confirm the GET request returns multiple items.
+POST http://localhost:8080/items
+Content-Type: application/json
+
+{
+    "name": "Database Connection String",
+    "value": 10
+}

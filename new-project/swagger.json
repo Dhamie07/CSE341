@@ -1,0 +1,115 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "New Project API",
+    "version": "1.0.0",
+    "description": "API for managing items for the CSE341 New Project assignment."
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080",
+      "description": "Local Development Server"
+    },
+    {
+      "url": "https://your-render-app-name.onrender.com",
+      "description": "Render Deployment Server"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Items",
+      "description": "Endpoints for managing items"
+    }
+  ],
+  "paths": {
+    "/items": {
+      "get": {
+        "tags": [
+          "Items"
+        ],
+        "summary": "Retrieves a list of all items",
+        "responses": {
+          "200": {
+            "description": "A list of items.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Item"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Items"
+        ],
+        "summary": "Creates a new item",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ItemInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Item successfully created."
+          },
+          "400": {
+            "description": "Invalid input or data failed validation."
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Item": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "example": "654c60d5b035f8c6b7588102"
+          },
+          "name": {
+            "type": "string",
+            "example": "Project Requirement Checklist"
+          },
+          "value": {
+            "type": "number",
+            "example": 1
+          },
+          "__v": {
+            "type": "number",
+            "example": 0
+          }
+        }
+      },
+      "ItemInput": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "New Item Name"
+          },
+          "value": {
+            "type": "number",
+            "example": 50
+          }
+        },
+        "required": [
+          "name",
+          "value"
+        ]
+      }
+    }
+  }
+}
