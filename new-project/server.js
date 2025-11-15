@@ -4,6 +4,9 @@ const express = require('express');
 const app = express();
 require('dotenv').config();
 
+// NEW: Import the cors package
+const cors = require('cors'); 
+
 // Load the Swagger UI package
 const swaggerUi = require('swagger-ui-express'); 
 // Load the JSON documentation file directly using require()
@@ -13,6 +16,9 @@ const db = require('./config');
 const routes = require('./routes');
 
 const PORT = process.env.PORT || 8080;
+
+// NEW: Use CORS middleware to allow cross-origin requests from Swagger UI
+app.use(cors()); 
 
 // Middleware to parse incoming JSON data (Crucial for POST requests)
 app.use(express.json());
